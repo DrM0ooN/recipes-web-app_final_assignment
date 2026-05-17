@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block content %}
+<div class="card stack">
+    <div>
+        <h1>Recipe List</h1>
+        <p class="muted">Browse recipes by title, or filter the list by one or more ingredients.</p>
+    </div>
+
+    <form method="get" class="card form-card">
+        <h2>Filter Recipes</h2>
+        {{ filter_form.as_p }}
+        <div class="toolbar">
+            <button type="submit">Apply Filter</button>
+            <a class="secondary-link" href="{% url 'recipe_list' %}">Clear</a>
+        </div>
+    </form>
+
+    <ul class="recipe-list">
+        {% for recipe in recipes %}
+            <li>
+                <a href="{% url 'recipe_detail' recipe.pk %}">{{ recipe.title }}</a>
+                <img class="recipe-image" src="{{ recipe.image_url }}" alt="{{ recipe.title }} image">
+                <div class="muted">By {{ recipe.owner.username }}</div>
+            </li>
+        {% empty %}
+            <li>No recipes available yet.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

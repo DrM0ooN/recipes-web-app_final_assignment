@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Recipes{% endblock %}</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --bg: #f6f2ea;
+            --surface: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --accent: #b45309;
+            --accent-soft: #fef3c7;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #fffdf8 0%, var(--bg) 100%);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+        }
+
+        .nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.45rem 0.8rem;
+            border-radius: 999px;
+        }
+
+        .nav-links a:hover {
+            background: var(--accent-soft);
+            color: var(--accent);
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .auth-link {
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .button-link {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--surface);
+            background: var(--accent);
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .flash {
+            border-left: 4px solid var(--accent);
+            background: var(--accent-soft);
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .flash-list {
+            display: grid;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card h1,
+        .card h2,
+        .card h3 {
+            margin-top: 0;
+        }
+
+        .recipe-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .recipe-list li {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 0.9rem 1rem;
+            background: #fff;
+        }
+
+        .recipe-list li {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .recipe-image,
+        .recipe-detail-image {
+            width: 100%;
+            display: block;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .recipe-image {
+            aspect-ratio: 16 / 10;
+        }
+
+        .recipe-detail-image {
+            aspect-ratio: 16 / 9;
+            margin: 0.5rem 0 0.25rem;
+        }
+
+        .spacious-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .recipe-list a {
+            color: var(--text);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .recipe-list a:hover {
+            color: var(--accent);
+        }
+
+        .tag-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.5rem 0 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag-list li {
+            background: var(--accent-soft);
+            border: 1px solid #f3d48a;
+            border-radius: 999px;
+            padding: 0.35rem 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .action-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+        .form-card p {
+            margin: 0 0 1rem;
+        }
+
+        .form-card input,
+        .form-card textarea,
+        .form-card select {
+            width: 100%;
+            padding: 0.75rem 0.85rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font: inherit;
+        }
+
+        button,
+        .button-link,
+        .auth-link {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+        }
+
+        button:hover,
+        .button-link:hover,
+        .auth-link:hover {
+            transform: translateY(-1px);
+        }
+
+        button {
+            border: 0;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .secondary-link {
+            display: inline-block;
+            margin-left: 0.75rem;
+            color: var(--muted);
+        }
+
+        .muted {
+            color: var(--muted);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <a class="brand" href="{% url 'home' %}">Recipes</a>
+            <div class="nav-links nav-user">
+                <a href="{% url 'recipe_list' %}">Recipe List</a>
+                {% if user.is_authenticated %}
+                    <a class="button-link" href="{% url 'recipe_create' %}">Add Recipe</a>
+                    <span class="muted">Hello, {{ user.username }}</span>
+                    <a class="auth-link" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="auth-link" href="{% url 'login' %}">Login</a>
+                    <a class="auth-link" href="{% url 'register' %}">Register</a>
+                {% endif %}
+                <a href="/admin/">Admin</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% if messages %}
+            <div class="flash-list">
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

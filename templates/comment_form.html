@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="card form-card" style="max-width: 720px; margin: 0 auto;">
+    <h1>{{ page_title }}</h1>
+    <p class="muted">Recipe: {{ recipe.title }}</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{{ submit_label }}</button>
+        <a class="secondary-link" href="{% url 'recipe_detail' recipe.pk %}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

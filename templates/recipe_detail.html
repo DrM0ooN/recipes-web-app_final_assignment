@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}{{ recipe.title }}{% endblock %}
+
+{% block content %}
+<div class="card stack">
+    <h1>{{ recipe.title }}</h1>
+    <p class="muted">By {{ recipe.owner.username }} | {{ recipe.created_at|date:"M d, Y" }}</p>
+    <img class="recipe-detail-image" src="{{ recipe.image_url }}" alt="{{ recipe.title }} image">
+    <h2>Description</h2>
+    <p>{{ recipe.description|linebreaks }}</p>
+
+    <h2>Ingredients</h2>
+    <ul class="tag-list">
+        {% for ingredient in recipe.ingredients.all %}
+            <li>{{ ingredient.name }}</li>
+        {% empty %}
+            <li>No ingredients added.</li>
+        {% endfor %}
+    </ul>
+
+    {% if user == recipe.owner %}
+        <div class="toolbar">
+            <a class="action-link" href="{% url 'recipe_edit' recipe.pk %}">Edit</a>
+            <a class="action-link" href="{% url 'recipe_delete' recipe.pk %}">Delete</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="card stack" style="margin-top: 1.5rem;">
+    <h2>Comments</h2>
+    {% for comment in comments %}
+        <article style="border-top: 1px solid var(--border); padding-top: 1rem; margin-top: 1rem;">
+            <p class="muted">{{ comment.author.username }} | {{ comment.created_at|date:"M d, Y H:i" }}</p>
+            <p>{{ comment.text|linebreaks }}</p>
+            {% if user == comment.author %}
+                <div class="toolbar">
+                    <a class="action-link" href="{% url 'comment_edit' recipe.pk comment.pk %}">Edit</a>
+                    <a class="action-link" href="{% url 'comment_delete' recipe.pk comment.pk %}">Delete</a>
+                </div>
+            {% endif %}
+        </article>
+    {% empty %}
+        <p class="muted">No comments yet.</p>
+    {% endfor %}
+</div>
+
+{% if user.is_authenticated %}
+<div class="card form-card" style="margin-top: 1.5rem;">
+    <h2>Add a Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+</div>
+{% else %}
+<div class="card" style="margin-top: 1.5rem;">
+    <p class="muted"><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+</div>
+{% endif %}
+{% endblock %}

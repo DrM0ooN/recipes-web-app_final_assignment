@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Pancakes illustration">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fff8ec"/>
+      <stop offset="100%" stop-color="#f4c46b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" rx="48" fill="url(#bg)"/>
+  <circle cx="880" cy="170" r="96" fill="#ffd85a" opacity="0.85"/>
+  <ellipse cx="600" cy="535" rx="320" ry="115" fill="#ffffff" opacity="0.5"/>
+  <ellipse cx="600" cy="510" rx="250" ry="80" fill="#d88a38"/>
+  <ellipse cx="600" cy="455" rx="220" ry="70" fill="#e7a54d"/>
+  <ellipse cx="600" cy="400" rx="190" ry="60" fill="#f0c26a"/>
+  <path d="M520 330c34-34 126-44 171-19 41 23 66 68 71 117-43 9-91 12-150 7-48-5-88-15-130-34 8-31 18-52 38-71z" fill="#7cc96a"/>
+  <path d="M560 300c16 46 19 105 0 169" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.65"/>
+  <path d="M620 300c-18 48-20 104 0 165" stroke="#ffffff" stroke-width="14" stroke-linecap="round" opacity="0.65"/>
+  <text x="600" y="692" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" fill="#7b3e12">Pancakes</text>
+</svg>
